@@ -2,7 +2,7 @@ body {
     margin: 0;
     font-family: sans-serif;
     color: #000000;
-    background-image: url('/imagenes/1.jpeg'); /* Cambia la ruta a la imagen de fondo */
+    background-image: url("./1.png"); /* Cambia la ruta a la imagen de fondo */
     background-size: cover; /* Ajusta la imagen al tamaño de la pantalla */
     background-position: center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita repeticiones */
