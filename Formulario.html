@@ -53,8 +53,7 @@
       <textarea rows="2" id="oracion" name="oracion"></textarea>
     </div>
     <div>
-           <button id="submit" href="Despedida.html" type="submit" class="button-74" disabled>ENVIAR</button>
-
+      <button id="submit" href="Despedida.html" type="submit" class="button-74" disabled>ENVIAR</button>
     </div>
   </form>
 
@@ -72,10 +71,25 @@
           completo = false;
         }
       });
-
       boton.disabled = !completo;
     });
   </script>
+
+  <script>
+document.getElementById("formulario").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target).entries());
+
+  const res = await fetch("/api/guardar", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const json = await res.json();
+  alert(json.mensaje || json.error);
+});
+</script>
 
 </body>
 </html>
