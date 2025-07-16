@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PUERTA DEL CIELO INTERNACIONAL</title>
+  <link rel="stylesheet" type="text/css" href="Formulario.css"/>
+  <link rel="icon" href="imagenes/Logo.png" type="image/png"/>
+</head>
+<body>
+
+  <p>¡DEJANOS TUS DATOS PARA PONERNOS EN CONTACTO CONTIGO!</p>
+
+
+
+
+<form id="miFormulario">
+  <div class="form_input">
+    <label for="Fecha">Fecha</label>
+    <input type="date" id="fecha" name="Fecha" required>
+  </div>
+  <div class="form_input">
+    <label for="reunion">Reunión</label>
+      <select name="Opciones" id="Opciones" required>
+        <option >PRIMERA REUNIÓN</option>
+        <option >SEGUNDA REUNIÓN</option>
+        <option >TERCERA REUNIÓN</option>
+      </select>
+  </div>
+    <div class="form_input">
+    <label for="reunion">Persona</label>
+      <select name="Opciones" id="Opciones" required>
+        <option>HOMBRE</option>
+        <option>MUJER</option>
+        <option>JOVEN</option>
+        <option>NIÑO</option>
+      </select>
+  </div>
+  <div class="form_input">
+    <label for="nombre">Nombres y Apellidos</label>
+    <input type="text" id="nombre" name="nombre_completo" required>
+  </div>
+  <div class="form_input">
+    <label for="edad">Edad</label>
+    <input type="number" id="edad" name="edad" min="9" max="100" required>
+  </div>
+  <div class="form_input">
+    <label for="ciudad">Ciudad</label>
+    <input type="text" id="ciudad" name="ciudad" required>
+  </div>
+  <div class="form_input">
+    <label for="direccion">Dirección</label>
+    <input type="text" id="direccion" name="direccion" required>
+  </div>
+  <div class="form_input">
+    <label for="telefono">Teléfono de Contacto</label>
+    <input type="tel" id="telefono" name="telefono" required>
+  </div>
+  <div class="form_input">
+    <label for="correo">E-mail</label>
+    <input type="email" id="correo" name="correo" required>
+  </div>
+  <div class="form_input">
+    <label for="recibir_celula">¿Deseas recibir la célula en tu propia casa?</label>
+    <input type="text" id="recibir_celula" name="recibir_celula" required>
+  </div>
+  <div class="form_input">
+    <label for="tiempo_asistencia">¿Desde hace cuánto tiempo asistes a nuestras reuniones?</label>
+    <input type="text" id="tiempo_asistencia" name="tiempo_asistencia" required>
+  </div>
+  <div class="form_input">
+    <label for="como_nos_conocio">¿Cómo conociste nuestras reuniones?</label>
+    <input type="text" id="como_nos_conocio" name="como_nos_conocio" required>
+  </div>
+  <div class="form_input">
+    <label for="oracion">Escribe brevemente una petición por la que quieres que oremos:</label>
+    <textarea rows="2" id="oracion" name="oracion"></textarea>
+  </div>
+  <div>
+    <button id="submit" type="submit" class="button-74" disabled>ENVIAR</button>
+  </div>
+</form>
+
+<script>
+  const formulario = document.getElementById('miFormulario');
+  const inputs = formulario.querySelectorAll('input[required], textarea[required]');
+  const boton = document.getElementById('submit');
+
+  // Habilita el botón solo cuando todos los campos requeridos están llenos
+  formulario.addEventListener('input', () => {
+    let completo = true;
+    inputs.forEach(input => {
+      if (!input.value.trim()) completo = false;
+    });
+    boton.disabled = !completo;
+  });
+
+  // Envía el formulario por fetch
+  formulario.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+
+    const res = await fetch('/api/guardar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const json = await res.json();
+    alert(json.mensaje || json.error);
+
+    // Redirige si todo salió bien
+    if (json.mensaje) {
+      window.location.href = 'Despedida.html';
+    }
+  });
+</script>
+</body>
+</html>
