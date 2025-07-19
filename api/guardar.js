@@ -14,8 +14,8 @@ if (req.method !== "POST") {
 const {
     nombre_completo,
     edad,
-    ciudad,
-    direccion,
+    Alcaldía_o_Municipio,
+    Colonia,
     telefono,
     correo,
     recibir_celula,
@@ -23,24 +23,23 @@ const {
     como_nos_conocio,
     oracion,
     fecha,
-    reunion,
     persona
 } = req.body;
 
 try {
     const query = `
 INSERT INTO formulario (
-    nombre_completo, edad, ciudad, direccion, telefono,
+    nombre_completo, edad, Alcaldía_o_Municipio, Colonia, telefono,
     correo, recibir_celula, tiempo_asistencia, como_nos_conocio,
-    oracion, fecha, reunion, persona
-) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
+    oracion, fecha, persona
+) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
 `;
 
 await pool.query(query, [
     nombre_completo,
     edad,
-    ciudad,
-    direccion,
+    Alcaldía_o_Municipio,
+    Colonia,
     telefono,
     correo,
     recibir_celula,
@@ -48,7 +47,6 @@ await pool.query(query, [
     como_nos_conocio,
     oracion,
     fecha,
-    reunion,
     persona
 ]);
 
