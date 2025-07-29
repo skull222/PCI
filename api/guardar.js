@@ -14,7 +14,7 @@ if (req.method !== "POST") {
 const {
     nombre_completo,
     edad,
-    Alcaldía_o_Municipio,
+    alcaldía_o_municipio,
     Colonia,
     telefono,
     correo,
@@ -29,7 +29,7 @@ const {
 try {
     const query = `
 INSERT INTO formulario (
-    nombre_completo, edad, Alcaldía_o_Municipio, Colonia, telefono,
+    nombre_completo, edad, alcaldía_o_municipio, Colonia, telefono,
     correo, recibir_celula, tiempo_asistencia, como_nos_conocio,
     oracion, fecha, persona
 ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
@@ -38,7 +38,7 @@ INSERT INTO formulario (
 await pool.query(query, [
     nombre_completo,
     edad,
-    Alcaldía_o_Municipio,
+    alcaldía_o_municipio,
     Colonia,
     telefono,
     correo,
